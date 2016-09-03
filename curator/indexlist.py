@@ -127,7 +127,7 @@ class IndexList(object):
 
         working_list = self.working_list()
         for index in self.working_list():
-            if self.index_info[index]['state'] == 'close':
+            if self.index_info[index].get('state') == 'close':
                 working_list.remove(index)
         if working_list:
             index_lists = chunk_index_list(working_list)
@@ -171,7 +171,7 @@ class IndexList(object):
                     s['number_of_shards'] = (
                         wl['settings']['index']['number_of_shards']
                     )
-                    s['state'] = wl['state']
+                    s['state'] = wl.get('state')
                     if 'routing' in wl['settings']['index']:
                         s['routing'] = wl['settings']['index']['routing']
 
