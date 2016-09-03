@@ -147,9 +147,7 @@ class IndexList(object):
         index_lists = chunk_index_list(self.indices)
         for l in index_lists:
             working_list = (
-                self.client.cluster.state(
-                    index=to_csv(l),metric='metadata'
-                )['metadata']['indices']
+                self.client.indices.get('_all')
             )
             if working_list:
                 for index in list(working_list.keys()):
