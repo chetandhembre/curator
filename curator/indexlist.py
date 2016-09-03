@@ -599,9 +599,9 @@ class IndexList(object):
         self.loggit.debug('Filtering closed indices')
         self.empty_list_check()
         for index in self.working_list():
-            condition = self.index_info[index]['state'] == 'close'
+            condition = self.index_info[index].get('state', None) == 'close'
             self.loggit.debug('Index {0} state: {1}'.format(
-                    index, self.index_info[index]['state']
+                    index, self.index_info[index].get('state', None)
                 )
             )
             self.__excludify(condition, exclude, index)
@@ -618,9 +618,9 @@ class IndexList(object):
         self.loggit.debug('Filtering open indices')
         self.empty_list_check()
         for index in self.working_list():
-            condition = self.index_info[index]['state'] == 'open'
+            condition = self.index_info[index].get('state', None) == 'open'
             self.loggit.debug('Index {0} state: {1}'.format(
-                    index, self.index_info[index]['state']
+                    index, self.index_info[index].get('state', None)
                 )
             )
             self.__excludify(condition, exclude, index)
