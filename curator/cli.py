@@ -226,6 +226,8 @@ def cli(config, dry_run, action_file):
                     )
                     sys.exit(1)
             else:
+                import traceback
+                traceback.print_exc()
                 logger.error(
                     'Failed to complete action: {0}.  {1}: '
                     '{2}'.format(action, type(e), e)
