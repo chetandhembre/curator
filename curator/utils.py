@@ -961,7 +961,7 @@ def test_repo_fs(client, repository=None):
             '{0}'.format(msg)
         )
 
-def snapshot_running(client):
+def snapshot_running(client, repository=None):
     """
     Return `True` if a snapshot is in progress, and `False` if not
 
@@ -969,7 +969,7 @@ def snapshot_running(client):
     :rtype: bool
     """
     try:
-        status = client.snapshot.status()['snapshots']
+        status = client.snapshot.status(repository=repository)['snapshots']
     except Exception as e:
         report_failure(e)
     # We will only accept a positively identified False.  Anything else is

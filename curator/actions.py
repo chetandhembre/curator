@@ -668,27 +668,27 @@ class Snapshot(object):
         self.name = parse_date_pattern(name)
         #: Instance variable.
         #: The Elasticsearch Client object derived from `ilo`
-        self.client              = ilo.client
+        self.client = ilo.client
         #: Instance variable.
         #: Internal reference to `ilo`
         self.index_list = ilo
         #: Instance variable.
         #: Internally accessible copy of `repository`
-        self.repository          = repository
+        self.repository = repository
         #: Instance variable.
         #: Internally accessible copy of `wait_for_completion`
         self.wait_for_completion = wait_for_completion
         #: Instance variable.
         #: Internally accessible copy of `skip_repo_fs_check`
         self.skip_repo_fs_check  = skip_repo_fs_check
-        self.state               = None
+        self.state = None
 
         #: Instance variable.
         #: Populated at instance creation time by calling
         #: :mod:`curator.utils.create_snapshot_body` with `ilo.indices` and the
         #: provided arguments: `ignore_unavailable`, `include_global_state`,
         #: `partial`
-        self.body                = create_snapshot_body(
+        self.body = create_snapshot_body(
                 ilo.indices,
                 ignore_unavailable=ignore_unavailable,
                 include_global_state=include_global_state,
@@ -740,7 +740,7 @@ class Snapshot(object):
         """
         if not self.skip_repo_fs_check:
             test_repo_fs(self.client, self.repository)
-        if snapshot_running(self.client):
+        if snapshot_running(self.client, self.repository):
             raise SnapshotInProgress('Snapshot already in progress.')
         try:
             self.loggit.info('Creating snapshot "{0}" from indices: '
